@@ -1,5 +1,8 @@
 package com.binaryTree.controller;
 
+import com.binaryTree.domain.Node;
+import com.binaryTree.domain.Tree;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,6 +17,12 @@ import java.util.Random;
 @Controller
 public class HelloController {
 
+    @Autowired
+    private Node node;
+
+    @Autowired
+    private Tree tree;
+
 	@RequestMapping(value = "/",method = RequestMethod.GET)
     @ResponseBody
     public int printWelcome() {
@@ -23,6 +32,7 @@ public class HelloController {
         for (Integer number : numbers) {
 
             System.out.println(number.intValue());
+            tree.insertElements(numbers);
             //return number.intValue();
         }
 

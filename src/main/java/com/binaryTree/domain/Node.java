@@ -1,6 +1,8 @@
 package com.binaryTree.domain;
 
+import org.springframework.stereotype.Component;
 
+@Component
 public class Node {
 
     private int key;
@@ -37,4 +39,5 @@ public class Node {
     public void setRightNode(Node rightNode) {
         this.rightNode = rightNode;
     }
+
 }
