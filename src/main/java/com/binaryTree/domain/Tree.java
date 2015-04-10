@@ -3,12 +3,13 @@ package com.binaryTree.domain;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Component
 public class Tree {
     
-    private List<Node> nodes = new ArrayList<Node>();
+    private List<Node> nodes;
 
     public Tree() {
     }
@@ -25,16 +26,41 @@ public class Tree {
         this.nodes = nodes;
     }
     
-    public void insertElements(List<Integer> numbers){
-        
-        this.nodes.add(new Node(0));
+    public void insertElements(List<Integer> numbers) {
 
-        for (Integer number : numbers) {
+        Node node = new Node(0);
+    /*
+        for (Integer numberToInsert : numbers) {
 
-            for (Node node : nodes) {
-                
+                if (node.getKey() == 0){
+                    node.setKey(numberToInsert);
+                }
+                else if (numberToInsert < node.getKey()) {
+                    if (node.getLeftNode() == null) {
+                        node.setLeftNode(new Node(numberToInsert));
+                    } else {
+                        nodes.add(new Node(numberToInsert));
+                        break;
+                    }
+                } else if (numberToInsert > node.getKey()) {
+                    if (node.getRightNode() == null) {
+                        node.setRightNode(new Node(numberToInsert));
+                    } else {
+                        nodes.add(new Node(numberToInsert));
+                        break;
+                    }
+                }
+
+        }*/
+
+        for (Integer numberToInsert : numbers) {
+
+            if (node.getKey() == 0){
+                node.setKey(numberToInsert);
             }
+
+
         }
-        
+
     }
 }

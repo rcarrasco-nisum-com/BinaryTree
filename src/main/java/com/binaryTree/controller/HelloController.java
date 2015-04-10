@@ -2,6 +2,8 @@ package com.binaryTree.controller;
 
 import com.binaryTree.domain.Node;
 import com.binaryTree.domain.Tree;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,26 +19,30 @@ import java.util.Random;
 @Controller
 public class HelloController {
 
-    @Autowired
-    private Node node;
+    //@Autowired
+    private Node node = new Node();
 
-    @Autowired
-    private Tree tree;
+    //@Autowired
+    private Tree tree = new Tree();
 
 	@RequestMapping(value = "/",method = RequestMethod.GET)
     @ResponseBody
-    public int printWelcome() {
-        
-        List<Integer> numbers = generateData();
+    public String printWelcome() {
+
+        List<Integer> numbers = new ArrayList();
+        numbers = generateData();
 
         for (Integer number : numbers) {
 
             System.out.println(number.intValue());
-            tree.insertElements(numbers);
-            //return number.intValue();
         }
+        tree.insertElements(numbers);
 
-        return 999;
+        Gson gson = new GsonBuilder().serializeNulls().setPrettyPrinting().create();
+
+        String treJson = gson.toJson(tree);
+        System.out.println(treJson);
+        return treJson;
 	}
     
     public List<Integer> generateData(){
@@ -44,7 +50,7 @@ public class HelloController {
         List<Integer> numbers = new ArrayList<Integer>();
 
         Random ran = new Random();
-        ArrayList<Integer> al = new ArrayList<Integer>();
+        ArrayList<Integer> al = new ArrayList();
         for(int i = 1; i <= 14; i++)
             al.add(i);
         int[] number = new int[9];
@@ -52,10 +58,8 @@ public class HelloController {
         for(int i = 0; i < number.length; i++)
         {
             number[i] = al.remove(ran.nextInt(al.size()));
-
             numbers.add(number[i]);
         }
-
 
         Collections.shuffle(numbers);
         return numbers;

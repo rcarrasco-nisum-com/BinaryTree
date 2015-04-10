@@ -14,6 +14,8 @@ public class Node {
 
     public Node(int key) {
         this.key = key;
+        this.leftNode = null;
+        this.rightNode = null;
     }
 
     public int getKey() {
